@@ -6,6 +6,7 @@ import SeekBar from '../components/SeekBar.vue'
 import VinylRecord from '../components/VinylRecord.vue'
 import TrackInfo from '../components/TrackInfo.vue'
 import PlaybackControls from '../components/PlaybackControls.vue'
+import VolumeControl from '../components/VolumeControl.vue'
 
 const player = usePlayerStore()
 </script>
@@ -23,8 +24,10 @@ const player = usePlayerStore()
           />
         </CircularProgress>
       </div>
+      <div class="now-playing-view__controls">
       <SeekBar />
       <TrackInfo /><PlaybackControls />
+      <VolumeControl context="now-playing" />
       <p v-if="player.queue.source === 'playlist'" class="playing-source">來自：{{ player.queue.playlistName }}</p>
       <p v-if="player.status !== 'ready'" class="playback-status" role="status">
         {{
@@ -49,6 +52,7 @@ const player = usePlayerStore()
       <div class="player-utilities" aria-label="即將推出的功能">
         <span>歌詞 <small>即將推出</small></span>
         <span>接下來播放 <small>即將推出</small></span>
+      </div>
       </div>
     </section>
   </div>

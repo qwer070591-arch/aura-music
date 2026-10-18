@@ -9,6 +9,8 @@ class FakeAudio extends EventTarget {
   currentTime = 0
   duration = Number.NaN
   paused = true
+  volume = 1
+  muted = false
   ended = false
   seekable = { length: 1 }
   constructor() {
@@ -75,6 +77,73 @@ beforeEach(() => {
 })
 
 describe('one native audio engine and Pinia sync', () => {
+  it('applies the default volume to the single audio engine and keeps it across tracks and seek', async () => {
+    const { player, audio } = await setup()
+    expect(player.volume).toBe(0.7)
+    expect(audio.volume).toBe(0.7)
+    expect(audio.muted).toBe(false)
+    audio.metadata(85)
+    player.seek(20)
+    player.setVolume(0.4)
+    expect(audio.volume).toBe(0.4)
+    expect(audio.currentTime).toBe(20)
+    player.nextTrack()
+    expect(FakeAudio.instances).toHaveLength(1)
+    expect(audio.volume).toBe(0.4)
+    expect(audio.muted).toBe(false)
+  })
+
+  it('mutes, restores the previous nonzero level, and unmutes when raised from zero', async () => {
+    const { player, audio } = await setup()
+    player.setVolume(0.36)
+    player.toggleMute()
+    expect(player.isMuted).toBe(true)
+    expect(audio.muted).toBe(true)
+    player.toggleMute()
+    expect(player.volume).toBe(0.36)
+    expect(audio.volume).toBe(0.36)
+    expect(audio.muted).toBe(false)
+    player.setVolume(0)
+    expect(player.lastNonZeroVolume).toBe(0.36)
+    expect(player.isMuted).toBe(true)
+    player.toggleMute()
+    expect(player.volume).toBe(0.36)
+    player.setVolume(0)
+    player.setVolume(0.12)
+    expect(player.isMuted).toBe(false)
+    expect(audio.volume).toBe(0.12)
+    expect(audio.muted).toBe(false)
+  })
+
+  it('persists valid volume settings without duplicate writes and survives broken storage', async () => {
+    const saved = new Map<string, string>()
+    const setItem = vi.fn((key: string, value: string) => saved.set(key, value))
+    vi.stubGlobal('localStorage', {
+      getItem: (key: string) => saved.get(key) ?? null,
+      setItem,
+    })
+    const { VOLUME_KEY } = await import('../src/data/volume')
+    const { player } = await setup()
+    player.setVolume(0.58)
+    player.setVolume(0.58)
+    expect(setItem).toHaveBeenCalledTimes(1)
+    player.toggleMute()
+    const { createPinia, setActivePinia } = await import('pinia')
+    const { usePlayerStore } = await import('../src/stores/player')
+    setActivePinia(createPinia())
+    expect(usePlayerStore()).toMatchObject({ volume: 0.58, isMuted: true, lastNonZeroVolume: 0.58 })
+    saved.set(VOLUME_KEY, '{broken')
+    setActivePinia(createPinia())
+    expect(usePlayerStore()).toMatchObject({ volume: 0.7, isMuted: false })
+    saved.set(VOLUME_KEY, JSON.stringify({ version: 1, volume: 4, isMuted: false, lastNonZeroVolume: 0.5 }))
+    setActivePinia(createPinia())
+    expect(usePlayerStore().volume).toBe(0.7)
+    vi.stubGlobal('localStorage', { getItem: () => { throw new Error('denied') }, setItem: () => { throw new Error('denied') } })
+    setActivePinia(createPinia())
+    const restricted = usePlayerStore()
+    restricted.setVolume(0.2)
+    expect(restricted.volume).toBe(0.2)
+  })
   it('persists favorite changes and drops invalid stored song IDs', async () => {
     const saved = new Map<string, string>()
     vi.stubGlobal('localStorage', {

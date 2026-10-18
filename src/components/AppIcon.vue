@@ -13,6 +13,8 @@ defineProps<{
     | 'previous'
     | 'next'
     | 'music'
+    | 'volume'
+    | 'volume-off'
   size?: number
   filled?: boolean
 }>()
@@ -86,6 +88,13 @@ defineProps<{
     </template>
     <template v-else-if="name === 'next'">
       <path d="M19 5v14M6 5l11 7-11 7z" fill="currentColor" stroke="none" />
+    </template>
+    <template v-else-if="name === 'volume' || name === 'volume-off'">
+      <path d="M4 9v6h4l5 4V5L8 9H4z" />
+      <template v-if="name === 'volume'">
+        <path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11" />
+      </template>
+      <path v-else d="m17 9 5 6m0-6-5 6" />
     </template>
     <template v-else-if="name === 'music'">
       <path

@@ -3,6 +3,7 @@ import { AudioService, type AudioEvent } from '../services/audio'
 import { licensedTracks } from '../data/tracks'
 import { readFavoriteIds, saveFavoriteIds } from '../data/favorites'
 import { readRecentTrackIds, saveRecentTrackIds, validRecentTrackIds } from '../data/recentlyPlayed'
+import { DEFAULT_VOLUME, readVolumePreference, saveVolumePreference } from '../data/volume'
 import type { Track } from '../types/track'
 
 export type RepeatMode = 'off' | 'all' | 'one'
@@ -38,6 +39,9 @@ interface PlayerState {
   tracks: Track[]
   trackDurations: Record<string, number>
   recentlyPlayedIds: string[]
+  volume: number
+  isMuted: boolean
+  lastNonZeroVolume: number
 }
 
 let engine: AudioService | null = null
@@ -68,6 +72,7 @@ export const usePlayerStore = defineStore('player', {
     tracks: licensedTracks,
     trackDurations: Object.fromEntries(licensedTracks.map((track) => [track.id, track.duration])),
     recentlyPlayedIds: readRecentTrackIds(licensedTracks.map((track) => track.id)),
+    ...readVolumePreference(),
   }),
   getters: {
     progress: (state) =>
@@ -91,7 +96,41 @@ export const usePlayerStore = defineStore('player', {
     initAudio() {
       if (engine) return
       engine = new AudioService((event) => this.onAudioEvent(event))
+      this.applyVolume()
       this.loadCurrentTrack()
+    },
+    applyVolume() {
+      if (!engine) return
+      engine.audio.volume = this.volume
+      engine.audio.muted = this.isMuted
+    },
+    persistVolume() {
+      saveVolumePreference({
+        volume: this.volume,
+        isMuted: this.isMuted,
+        lastNonZeroVolume: this.lastNonZeroVolume,
+      })
+    },
+    setVolume(value: number) {
+      if (!Number.isFinite(value)) return
+      const volume = Math.min(1, Math.max(0, value))
+      const isMuted = volume === 0
+      if (this.volume === volume && this.isMuted === isMuted) return
+      this.volume = volume
+      this.isMuted = isMuted
+      if (volume > 0) this.lastNonZeroVolume = volume
+      this.applyVolume()
+      this.persistVolume()
+    },
+    toggleMute() {
+      if (this.isMuted || this.volume === 0) {
+        if (this.volume === 0) this.volume = this.lastNonZeroVolume || DEFAULT_VOLUME
+        this.isMuted = false
+      } else {
+        this.isMuted = true
+      }
+      this.applyVolume()
+      this.persistVolume()
     },
     onAudioEvent(event: AudioEvent) {
       if (!engine?.matches(this.currentTrack.audioSrc)) return

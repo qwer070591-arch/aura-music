@@ -6,11 +6,13 @@ AURA MUSIC 是以 Vue 3 製作的繁體中文音樂播放器作品。介面保�
 
 ## 畫面預覽
 
-以下為換色前的 Phase 4C-1 發布準備截圖，保留供視覺對照。午夜極光版本待人工驗收後更新正式展示截圖。
+以下截圖取自 Midnight Aurora 的正式 Build preview。歌單畫面使用介面建立的範例歌單，歌曲均為專案中的授權音樂。
 
 | 手機版（390 × 844） | 桌面版（1440 × 900） |
 | --- | --- |
-| [首頁](docs/screenshots/home-mobile.png) · [音樂庫](docs/screenshots/library-mobile.png) · [搜尋](docs/screenshots/search-mobile.png) · [正在播放](docs/screenshots/now-playing-mobile.png) · [歌單列表](docs/screenshots/playlists-mobile.png) · [歌單詳情](docs/screenshots/playlist-detail-mobile.png) | [首頁](docs/screenshots/home-desktop.png) · [正在播放](docs/screenshots/now-playing-desktop.png) |
+| <img src="docs/screenshots/now-playing-mobile.png" alt="手機版正在播放畫面" width="260"> | <img src="docs/screenshots/home-desktop.png" alt="桌面版首頁與側邊導覽" width="620"> |
+
+其他畫面：手機版 [首頁](docs/screenshots/home-mobile.png) · [音樂庫](docs/screenshots/library-mobile.png) · [搜尋](docs/screenshots/search-mobile.png) · [歌單列表](docs/screenshots/playlists-mobile.png) · [歌單詳情](docs/screenshots/playlist-detail-mobile.png)；桌面版 [音樂庫](docs/screenshots/library-desktop.png) · [正在播放](docs/screenshots/now-playing-desktop.png) · [歌單列表](docs/screenshots/playlists-desktop.png)。
 
 ## 技術架構
 
@@ -24,6 +26,7 @@ AURA MUSIC 是以 Vue 3 製作的繁體中文音樂播放器作品。介面保�
 - 首頁精選、推薦、最近播放；音樂庫與即時搜尋歌曲名稱／歌手
 - 收藏、歌手篩選與搜尋組合，收藏及最近播放儲存於本機
 - 播放／暫停、Seek Bar、黑膠圓環、Mini Player、Shuffle、Repeat Off／All／One
+- 桌面與手機音量控制、靜音及本機音量偏好保存
 - 自訂歌單的建立、重新命名、刪除、歌曲加入／移除與拖曳／按鈕排序
 - 從歌單播放時使用該歌單的佇列；跨頁共用同一個音訊引擎
 - 正在播放頁的「音樂授權資訊」可查看目前歌曲署名、授權及官方來源
@@ -38,7 +41,7 @@ AURA MUSIC 是以 Vue 3 製作的繁體中文音樂播放器作品。介面保�
 | `public/audio/`、`public/covers/` | 已授權 MP3 與自製 SVG 封面 |
 | `tests/` | Vitest 測試 |
 | `docs/AUDIO_LICENSES.md` | 每首歌曲的官方來源、下載位置、授權及雜湊 |
-| `docs/screenshots/` | 正式 Build preview 的作品截圖 |
+| `docs/screenshots/` | Midnight Aurora 正式 Build preview 的手機與桌面作品截圖 |
 | `design-reference/` | 本機保留的原始 Stitch HTML 設計參考；含外部圖片連結，預設不納入公開版控 |
 
 ## 在本機執行
