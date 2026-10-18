@@ -2,7 +2,7 @@
 
 AURA MUSIC 是以 Vue 3 製作的繁體中文音樂播放器作品。介面保留 Stitch 參考設計的版型，採用「Midnight Aurora／午夜極光」深海藍、冰川青與月光白主題，提供 26 首具有明確授權的示範音樂。播放由單一瀏覽器 `HTMLAudioElement` 管理；進站時不會自動發聲。
 
-**線上 Demo：** 待部署，網址將於人工驗收後補上。
+**線上 Demo：** [https://aura-music-kappa.vercel.app/](https://aura-music-kappa.vercel.app/)
 
 ## 畫面預覽
 
@@ -63,7 +63,7 @@ npm.cmd run preview
 
 ## Vercel 發布設定
 
-匯入公開 Repository 時，以專案根目錄為 Root Directory、`npm run build` 為 Build Command、`dist` 為 Output Directory；Node.js 選 24.x。`vercel.json` 僅將現有 Vue Router 頁面回退至 `index.html`，不改寫 `/audio/`、`/covers/` 等靜態資源。Vite 會將 `public/` 內容複製到 `dist/` 根目錄。本階段尚未實際部署，正式網域的深層連結、CDN Range 回應及流量仍須於部署後複查。
+匯入公開 Repository 時，以專案根目錄為 Root Directory、`npm run build` 為 Build Command、`dist` 為 Output Directory；Node.js 選 24.x。`vercel.json` 僅將現有 Vue Router 頁面回退至 `index.html`，不改寫 `/audio/`、`/covers/` 等靜態資源。Vite 會將 `public/` 內容複製到 `dist/` 根目錄。正式 Demo 已上線；深層連結、CDN Range 回應及流量仍可持續複查。
 
 ## 音樂與素材授權
 
@@ -71,7 +71,7 @@ npm.cmd run preview
 
 Kevin MacLeod 的曲目取自 [Incompetech](https://incompetech.com/music/royalty-free/)；1000 Handz、Vlad Annenkov 與 Ketsa 的曲目取自 [Free Music Archive](https://freemusicarchive.org/)。1000 Handz 的來源頁另提示 [1000Handz.com](https://1000handz.com/)，Ketsa 的來源頁另提示 [Ketsa.uk](https://ketsa.uk/)。音檔未剪輯或重新編碼；封面均為本專案自製抽象 SVG，不使用商業專輯圖片。
 
-26 首音檔總計 **138,193,866 bytes（約 131.79 MiB）**，其中本次新增 18 首 **86.32 MiB**。同站 /audio/ 路徑需要將音檔納入 Repository 與靜態部署輸出；訪客播放會消耗相應頻寬。正式發布前應確認 Git 託管和部署方案的儲存、建置輸出及傳輸配額。
+26 首音檔總計 **138,193,866 bytes（約 131.79 MiB）**，其中後續擴充的 18 首占 **86.32 MiB**。同站 /audio/ 路徑會將音檔納入 Repository 與靜態部署輸出；訪客播放會消耗相應頻寬。公開部署後仍需留意 Git 託管和部署方案的儲存、建置輸出及傳輸配額。
 
 ## 目前限制與後續方向
 
