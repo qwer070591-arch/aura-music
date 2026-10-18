@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-label="ice-flow abstract cover">
+<defs><radialGradient id="light" cx=".52" cy=".31" r=".78"><stop stop-color="#285569"/><stop offset="1" stop-color="#102733"/></radialGradient></defs>
+<rect width="600" height="600" fill="#102733"/><rect width="600" height="600" fill="url(#light)"/><path d="m0 215 207-83 103 101 161-131 129 97v401H0Z" fill="#4c7d8c" opacity=".67"/><path d="m0 314 186-70 117 120 137-158 160 79v315H0Z" fill="#8cbac5" opacity=".58"/><path d="M0 493 124 393l125 43 129-103 222 105v162H0Z" fill="#1b4256"/><path d="m207 132 96 232m168-262-93 231m-254 60 62-149" stroke="#d2e8e9" stroke-width="10" opacity=".8"/>
+<rect x="22" y="22" width="556" height="556" rx="25" fill="none" stroke="#b5dce2" stroke-opacity=".23" stroke-width="2"/></svg>

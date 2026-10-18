@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-label="hidden-glade abstract cover">
+<defs><radialGradient id="light" cx=".52" cy=".31" r=".78"><stop stop-color="#3c5943"/><stop offset="1" stop-color="#172823"/></radialGradient></defs>
+<rect width="600" height="600" fill="#172823"/><rect width="600" height="600" fill="url(#light)"/><circle cx="313" cy="229" r="130" fill="#c7c8a2" opacity=".76"/><path d="M74 0v600M164 0v600M458 0v600M540 0v600" stroke="#203629" stroke-width="53"/><path d="M0 120q101-90 218-30M380 100q110-86 220-29M0 254q106-69 200-32M408 205q120-72 192-28" stroke="#52694c" stroke-width="27" fill="none"/><path d="M0 502q136-72 275-15t325-12v125H0Z" fill="#2c4736"/><path d="M226 600q27-113 76-190 47 79 76 190" fill="#a2a788" opacity=".78"/>
+<rect x="22" y="22" width="556" height="556" rx="25" fill="none" stroke="#c3cda5" stroke-opacity=".23" stroke-width="2"/></svg>

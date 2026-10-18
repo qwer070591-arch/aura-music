@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-label="the-chamber abstract cover">
+<defs><radialGradient id="light" cx=".52" cy=".31" r=".78"><stop stop-color="#5b3a36"/><stop offset="1" stop-color="#221e24"/></radialGradient></defs>
+<rect width="600" height="600" fill="#221e24"/><rect width="600" height="600" fill="url(#light)"/><path d="M77 600V290Q77 85 300 85T523 290v310M154 600V303Q154 164 300 164T446 303v297M227 600V317Q227 235 300 235T373 317v283" fill="none" stroke="#b4876f" stroke-width="24" opacity=".77"/><path d="M267 600V337q0-34 33-34t33 34v263" fill="#543a39" stroke="#d3ab81" stroke-width="9"/><circle cx="300" cy="369" r="19" fill="#d4b78b"/><path d="M0 550h600" stroke="#c5a17e" stroke-width="12" opacity=".65"/>
+<rect x="22" y="22" width="556" height="556" rx="25" fill="none" stroke="#c5a17e" stroke-opacity=".23" stroke-width="2"/></svg>

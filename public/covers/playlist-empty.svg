@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-label="空歌單抽象封面">
+  <defs><radialGradient id="bg"><stop stop-color="#29425a"/><stop offset="1" stop-color="#101827"/></radialGradient></defs>
+  <rect width="600" height="600" fill="url(#bg)"/>
+  <circle cx="300" cy="300" r="205" fill="none" stroke="#6cc9de" stroke-opacity=".32" stroke-width="2"/>
+  <circle cx="300" cy="300" r="155" fill="none" stroke="#6cc9de" stroke-opacity=".2" stroke-width="2"/>
+  <path d="M210 240h165M210 300h165M210 360h105" stroke="#cae9f0" stroke-opacity=".68" stroke-width="14" stroke-linecap="round"/>
+  <circle cx="378" cy="360" r="19" fill="#6cc9de" fill-opacity=".58"/>
+</svg>
